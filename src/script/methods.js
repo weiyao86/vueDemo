@@ -1,7 +1,8 @@
 let methods = {
-  dateFormat(date, format) => {
+  dateFormat(date, format) {
+
     if (!date) {
-      date = +new Date();
+      date = new Date();
     }
     if (!format) {
       format = 'yyyy-MM-dd';
@@ -27,6 +28,33 @@ let methods = {
       }
     }
     return format;
+  },
+  numAdd(num, num1) {
+
+    var r1, r2, m;
+    try {
+      r1 = num.toString().split(".")[1].length
+    } catch (e) {
+      r1 = 0;
+    }
+    try {
+      r2 = num1.toString().split(".")[1].length
+    } catch (e) {
+      r2 = 0;
+    }
+    m = Math.pow(10, Math.max(r1, r2));
+    return (num * m + num1 * m) / m;
+  },
+  // 图片前缀
+  httpImage(imgSrc) {
+    if (!imgSrc) {
+      return "";
+    }
+
+    if (!imgSrc.match(/http(s)?\:\/\//ig)) {
+      imgSrc = `https://static.xinyingtong.cn/${imgSrc}?x-oss-process=style/mobile`;
+    }
+    return imgSrc;
   }
 };
 export default methods;

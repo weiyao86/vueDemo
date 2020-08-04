@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" v-click-outside='vcoConfig'>
+    <img alt="Vue logo" class="bottom-button" src="../assets/logo.png" v-click-outside='vcoConfig'>
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
@@ -25,6 +25,11 @@ export default {
       }
     }
   },
+  created() {
+
+    console.log(this.$http)
+    console.log(this.$dateFormat('', 'yy-MM-dd'))
+  },
   methods: {
 
     handler() {
@@ -37,3 +42,17 @@ export default {
 }
 
 </script>
+<style lang='scss'>
+body {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+@supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+  .bottom-button {
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+</style>

@@ -1,0 +1,186 @@
+.page,
+.movie-main {
+    height: 100%;
+    background: #ccc;
+
+    .head {
+        height: 210px;
+        background: url("../../images/banner_bj.png") no-repeat top left/cover transparent;
+        display: flex;
+        flex-flow: column;
+        padding-top: 25px;
+
+        &.noImage {
+            background: url("../../images/xytlogo.png") no-repeat center center;
+            background-size: 80px;
+        }
+
+        .search-wrapper {
+            height: 32px;
+            padding: 0 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .choose-address {
+                .select-area {
+                    margin-right: 15px;
+
+                    .txt {
+                        font-size: 14px;
+                        line-height: 16px;
+                        height: 16px;
+                        color: #fff;
+                        position: relative;
+
+                        &::after {
+                            content: '';
+                            border-width: 6px;
+                            border-style: solid;
+                            border-color: #fff transparent transparent transparent;
+                            position: absolute;
+                            bottom: 0;
+                            margin-left: 4px;
+                        }
+                    }
+                }
+            }
+
+            .search-btn {
+                width: 15px;
+                font-size: 16px;
+                color: #ddd;
+                padding: 5px;
+            }
+
+            .tabs {
+                flex: 1;
+                height: 32px;
+                line-height: 32px;
+                display: flex;
+                justify-content: center;
+
+                .tabs-item {
+
+                    /deep/ .van-tabs__wrap {
+                        height: 100%;
+
+                        .van-tabs__nav {
+                            background: transparent;
+                            padding-bottom: 0;
+
+                            .van-tabs__line {
+                                bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .swipe-wrap {
+            height: 178px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+
+            .my-swipe {
+                flex: 1;
+
+                .van-swipe-item {
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .kefu {
+        text-align: center;
+        padding: 9px 0;
+        color: #666;
+        background-color: #f1f1f1;
+        font-size: 15px;
+        line-height: 18.5px;
+
+        a {
+            color: #666;
+        }
+    }
+
+    .list-wrap {
+        .item {
+            padding: 10px;
+            display: flex;
+            height: 90px;
+
+            .left {
+                width: 65px;
+                display: flex;
+
+                img {
+                    overflow: hidden;
+                    object-fit: contain;
+                }
+            }
+
+            .middle {
+                flex: 1;
+                padding: 0 10px;
+                text-align: left;
+                min-width: 0;
+
+                .title {
+                    font-size: 17px;
+                    color: #333;
+
+                    .type {
+                        color: #666;
+                        font-size: 12px;
+                        padding: 0 3px;
+                    }
+                }
+
+                .rate {
+                    color: #0c62ff;
+                    font-size: 15px;
+                    padding: 10px 0 7px;
+
+                    .title {
+                        font-size: 13px;
+                        color: #666;
+                    }
+
+                    .num {
+                        padding: 0 3px;
+                    }
+                }
+
+                .actors {
+                    font-size: 13px;
+                    color: #666;
+                }
+
+                .launch-date {
+                    font-size: 12px;
+                    padding-top: 7px;
+                    color: #666;
+                }
+            }
+
+            .right {
+                width: 50px;
+                display: flex;
+                align-items: center;
+
+                .buy {
+                    background: #cf2414;
+                }
+            }
+        }
+    }
+}

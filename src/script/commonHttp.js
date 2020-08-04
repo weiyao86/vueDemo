@@ -8,9 +8,12 @@ import axios from 'axios';
 const config = {
   baseURL: 'https://www.xinyingtong.cn/api/',
   timeout: 30 * 1000,
+  retry: 1,
+  retryDelay: 1000,
   headers: {
     "Content-Type": "application/json;charset=utf-8",
-    "Accept": "application/json"
+    "Accept": "application/json",
+    "Token": localStorage.getItem("token") || ''
   }
 };
 
@@ -47,13 +50,6 @@ let interceptors = instance.interceptors.request.use(function(config) {
       loadingType: 'spinner'
     });
   }
-  let token = localStorage.getItem("userInfo");
-  if (!config.headers.hasOwnProperty('Authorization') && token) {
-    config.headers.Authorization = token;
-  } else {
-    config.headers.Authorization = '';
-  }
-
   // config.cancelToken = source.token;
   config.cancelToken = new CancelToken(cancel => {
     //传入当前所有请求状态，由切换路由时处理
@@ -140,8 +136,76 @@ export default {
 
   axios: function(options) {
 
-    // options = Object.assign({}, config, options);
-    return instance(options);
+    if (options)
+      return instance(options);
+    else
+      return instance;
+  },
+
+  //POST
+  post(url, data) {
+    let me = this;
+
+    return new Promise((resolve, reject) => {
+
+      let axiosPost;
+      if (Object.prototype.toString.apply(url) == "[object Object]") {
+        let options = Object.assign({}, url, {
+          method: 'post',
+          url: url,
+          data: data
+        });
+        axiosPost = me.axios(options);
+
+      } else {
+        axiosPost = me.axios().get(url, data);
+      }
+
+      me.axios().post(url, data).then((rst) => {
+        let data = rst.data;
+        me.handlerSuccess({
+          data: data,
+          resolve: resolve,
+          reject: reject,
+        });
+
+      }).catch((error) => {
+        reject(error);
+      }).finally(() => {});
+    })
+  },
+
+  //GET
+  get(url, data) {
+    let me = this;
+
+    return new Promise((resolve, reject) => {
+      let axiosGet;
+      if (Object.prototype.toString.apply(url) == "[object Object]") {
+        let options = Object.assign({}, url, {
+          method: 'get',
+          url: url,
+          data: data
+        });
+        axiosGet = me.axios(options);
+
+      } else {
+        axiosGet = me.axios().get(url, data);
+      }
+
+      axiosGet.then((rst) => {
+        let data = rst.data;
+
+        me.handlerSuccess({
+          data: data,
+          resolve: resolve,
+          reject: reject,
+        });
+
+      }).catch((error) => {
+        reject(error);
+      }).finally(() => {});
+    })
   },
 
   //无需返回promise对象时使用
@@ -166,6 +230,22 @@ export default {
         options.onCallBack.call(null, null);
       }
     });
+  },
+
+  handlerSuccess(rst) {
+    let me = this;
+    switch (rst.data.code) {
+      case 1:
+        rst.resolve(rst.data);
+        break;
+      case 250:
+      case 400:
+        rst.reject(rst.data);
+        break;
+      default:
+        rst.reject(rst.data);
+        break;
+    }
   },
 
   handlerError(err) {
