@@ -5,9 +5,14 @@ import axios from 'axios';
  * [config description]
  * @type {Object}
  */
+
+const URL_IDX = process.env.NODE_ENV == "production" ? 0 : 0;
+const URL_OPTS = ['https://www.xinyingtong.cn', 'http://192.168.30.217/'];
+
 const config = {
-  baseURL: 'https://www.xinyingtong.cn/api/',
+  baseURL: URL_OPTS[URL_IDX],
   timeout: 30 * 1000,
+  isLoading: true,
   retry: 1,
   retryDelay: 1000,
   headers: {
@@ -21,15 +26,14 @@ const config = {
 //dev与prod环境baseURL配置
 if (process.env.NODE_ENV === 'development') {
   //开发环境
-  config.baseURL = '/api';
+  // config.baseURL = '/api';
 } else if (process.env.NODE_ENV === 'production') {
-  //生产环境 //test
-  config.baseURL = 'https://www.xinyingtong.cn/api/'; // 'http://192.168.2.103:3000/';
+  //生产环境 
+  //config.baseURL = 'https://www.xinyingtong.cn/'; // 'http://192.168.2.103:3000/';
 }
 
 const CancelToken = axios.CancelToken;
 // let source = CancelToken.source();
-
 
 const instance = axios.create(config);
 
@@ -73,6 +77,7 @@ let interceptors = instance.interceptors.request.use(function(config) {
  */
 instance.interceptors.response.use(function(res) {
   // 对响应数据做点什么
+
   if (res.config.isLoading) {
     GlobalVue.$toast.clear();
   }
@@ -134,6 +139,8 @@ export default {
 
   cmpName: 'axios',
 
+  isObject: (obj) => { Object.prototype.toString.apply(obj) == "[object Object]" },
+
   axios: function(options) {
 
     if (options)
@@ -143,26 +150,22 @@ export default {
   },
 
   //POST
-  post(url, data) {
+  post(url, options) {
     let me = this;
 
     return new Promise((resolve, reject) => {
 
-      let axiosPost;
-      if (Object.prototype.toString.apply(url) == "[object Object]") {
-        let options = Object.assign({}, url, {
-          method: 'post',
-          url: url,
-          data: data
-        });
-        axiosPost = me.axios(options);
+      let cfg = {
+        method: 'post',
+        url: url,
+        isLoading: true
+      };
 
-      } else {
-        axiosPost = me.axios().get(url, data);
-      }
+      cfg = Object.assign({}, cfg, options);
 
-      me.axios().post(url, data).then((rst) => {
+      instance(cfg).then((rst) => {
         let data = rst.data;
+
         me.handlerSuccess({
           data: data,
           resolve: resolve,
@@ -176,24 +179,19 @@ export default {
   },
 
   //GET
-  get(url, data) {
+  get(url, options) {
     let me = this;
 
     return new Promise((resolve, reject) => {
-      let axiosGet;
-      if (Object.prototype.toString.apply(url) == "[object Object]") {
-        let options = Object.assign({}, url, {
-          method: 'get',
-          url: url,
-          data: data
-        });
-        axiosGet = me.axios(options);
+      let cfg = {
+        method: 'get',
+        url: url,
+        isLoading: true
+      };
 
-      } else {
-        axiosGet = me.axios().get(url, data);
-      }
+      cfg = Object.assign({}, cfg, options);
 
-      axiosGet.then((rst) => {
+      instance(cfg).then((rst) => {
         let data = rst.data;
 
         me.handlerSuccess({

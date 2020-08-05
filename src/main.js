@@ -33,10 +33,10 @@ Vue.use(Button).use(Tab).use(Tabs).use(Tabbar).use(TabbarItem).use(Toast).use(Em
       // LoadedHandler(el)
     },
     loading(listender, Init) {
-      console.log('loading')
+      // console.log('loading')
     },
     error(listender, Init) {
-      console.log('error')
+      // console.log('error')
     }
   }
 });

@@ -1,7 +1,14 @@
 .page,
 .movie-main {
-    height: 100%;
-    background: #ccc;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    .mescroll {
+        box-sizing: border-box;
+    }
 
     .head {
         height: 210px;
@@ -16,6 +23,9 @@
         }
 
         .search-wrapper {
+            position: sticky;
+            top: 25px;
+            z-index: 10;
             height: 32px;
             padding: 0 30px;
             display: flex;
@@ -133,10 +143,13 @@
                 padding: 0 10px;
                 text-align: left;
                 min-width: 0;
+                display: flex;
+                flex-flow: column;
 
                 .title {
                     font-size: 17px;
                     color: #333;
+                    padding-bottom: 10px;
 
                     .type {
                         color: #666;
@@ -148,7 +161,7 @@
                 .rate {
                     color: #0c62ff;
                     font-size: 15px;
-                    padding: 10px 0 7px;
+                    padding-bottom: 7px;
 
                     .title {
                         font-size: 13px;
@@ -162,12 +175,13 @@
 
                 .actors {
                     font-size: 13px;
+                    line-height: 14px;
                     color: #666;
+                    padding-bottom: 7px;
                 }
 
                 .launch-date {
                     font-size: 12px;
-                    padding-top: 7px;
                     color: #666;
                 }
             }
@@ -177,7 +191,7 @@
                 display: flex;
                 align-items: center;
 
-                .buy {
+                .van-button--danger {
                     background: #cf2414;
                 }
             }

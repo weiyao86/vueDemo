@@ -51,9 +51,14 @@ let methods = {
       return "";
     }
 
+
     if (!imgSrc.match(/http(s)?\:\/\//ig)) {
-      imgSrc = `https://static.xinyingtong.cn/${imgSrc}?x-oss-process=style/mobile`;
+      if (imgSrc.indexOf('.gif') > -1) {
+        imgSrc = "http://static.xinyingtong.cn/" + imgSrc;
+      } else
+        imgSrc = `https://static.xinyingtong.cn/${imgSrc}?x-oss-process=style/mobile`;
     }
+
     return imgSrc;
   }
 };

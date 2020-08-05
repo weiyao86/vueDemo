@@ -14,6 +14,8 @@ export default ({
 
     //定义全局过滤器
 
+    Vue.filter("httpImage", Methods['httpImage'])
+
     //注入组件选项
     // Vue.mixin({
     //  created(){}

@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import state from './state'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    cancelTokenList: []
-  },
+  state,
   mutations: {
     setCancelToken(state, cancel) {
       state.cancelTokenList.push(cancel);

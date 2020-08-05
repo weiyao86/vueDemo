@@ -7,9 +7,9 @@
      transition: all .2s;
  }
 
- * {
-     touch-action: pan-y;
- }
+ // * {
+ //     touch-action: pan-y;
+ // }
 
  ::-webkit-scrollbar {
      display: none;
@@ -56,7 +56,7 @@
 
  //导航菜单高度
  .page-padBottom {
-     padding-bottom: 34px;
+     padding-bottom: 50px;
  }
 
 
