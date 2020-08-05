@@ -8,6 +8,7 @@ import VueWechatTitle from 'vue-wechat-title'
 import Utils from './script/utils'
 
 import 'vant/lib/index.css';
+import 'animate.css';
 
 //适配REM转换
 import './script/adjust'
