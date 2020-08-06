@@ -33,11 +33,22 @@ export default {
   computed: {
     ...mapState(["cityId", "cityName"])
   },
-  created() {
+  created() {},
+
+  mounted() {
     let me = this;
     me.getBannerByKey();
+    me.initLocation();
   },
   methods: {
+
+    initLocation() {
+      let me = this;
+      me.$initLocation(rst => {
+
+        console.log(rst);
+      });
+    },
 
     mescrollInit(mescroll) {
       let me = this;

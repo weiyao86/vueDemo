@@ -92,9 +92,9 @@ module.exports = {
         }
       },
 
-      scss: {
-        data: `@import "@assets/styles/global.scss";` // path.resolve(__dirname, '@src/assets/styles/*.scss')
-      },
+      // scss: {
+      //   data: `@import "@assets/styles/global.scss";` //仅作为添加全局变量使用 path.resolve(__dirname, '@src/assets/styles/*.scss')
+      // },
       postcss: {
         plugins: [
           autoprefixer(),

@@ -3,7 +3,7 @@
     <mescroll-vue class="mescroll page-padBottom" :down="mescrollDown" :up="mescrollUp" ref="movieList" @init="mescrollInit">
       <div :class="{'noImage': !swiperList.length}" class="head">
         <div class="search-wrapper" v-show="navFlag == 1">
-          <router-link class="choose-address" tag="div" to="/movie/city">
+          <router-link class="choose-address" tag="div" to="/choosecity">
             <!-- <select-area :area="cityName"></select-area> -->
             <div class="select-area">
               <span class="txt">重庆</span>

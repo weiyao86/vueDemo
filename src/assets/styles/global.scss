@@ -1,6 +1,7 @@
  @charset 'UTF-8';
  @import './reset.scss';
 
+
  html,
  body {
      height: 100%;
@@ -15,24 +16,13 @@
      display: none;
  }
 
- .line-ellipsis {
-     overflow: hidden;
-     white-space: nowrap;
-     text-overflow: ellipsis;
- }
-
- .line2-ellipsis {
-     display: -webkit-box;
-     -webkit-box-orient: vertical;
-     -webkit-line-clamp: 2;
-     overflow: hidden;
- }
-
  input {
      caret-color: #ff9900;
  }
 
+
  .page {
+     position: relative;
      padding-bottom: 0;
 
      .header-wrap {
@@ -41,25 +31,33 @@
 
      /* 头部样式 */
      .van-nav-bar {
-         background: transparent;
+         background: #fff;
+
+         &--fixed {
+             top: 24px;
+         }
 
          .van-icon {
-             color: #fff;
+             color: #ccc;
          }
 
          .van-nav-bar__title {
-             color: #fff;
+             color: #666;
+             font-size: 18px;
          }
 
      }
+
+     .content-wrap {
+         position: fixed;
+         top: 69.5px;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         box-sizing: border-box;
+         overflow: auto;
+     }
  }
-
- //导航菜单高度
- .page-padBottom {
-     padding-bottom: 50px;
- }
-
-
 
  .paddingBottom {
      padding-bottom: 0;
@@ -72,5 +70,12 @@
 
      .paddingBottom {
          padding-bottom: 3.125rem;
+     }
+ }
+
+ @supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+     body {
+         padding: constant(safe-area-inset-top) constant(safe-area-inset-right) constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
      }
  }

@@ -3,10 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vClick from './script/directive/v-click-index'
-import { Button, Tab, Tabs, Tabbar, TabbarItem, Toast, Empty, Swipe, SwipeItem, Lazyload } from 'vant'
+import { Cell, IndexBar, IndexAnchor, NavBar, Button, Tab, Tabs, Tabbar, TabbarItem, Toast, Empty, Swipe, SwipeItem, Lazyload } from 'vant'
 import VueWechatTitle from 'vue-wechat-title'
 import Utils from './script/utils'
 
+import '@assets/styles/global.scss';
 import 'vant/lib/index.css';
 import 'animate.css';
 
@@ -22,13 +23,16 @@ FastClick.attach(document.body);
 Vue.use(VueWechatTitle);
 Vue.use(vClick);
 //vant ui cmp
-Vue.use(Button).use(Tab).use(Tabs).use(Tabbar).use(TabbarItem).use(Toast).use(Empty).use(Swipe).use(SwipeItem).use(Lazyload, {
+const vantCmp = [Cell, IndexBar, IndexAnchor, NavBar, Button, Tab, Tabs, Tabbar, TabbarItem, Toast, Empty, Swipe, SwipeItem];
+vantCmp.forEach(function(item) {
+  Vue.use(item);
+});
+
+Vue.use(Lazyload, {
   loading: require("@/assets/images/loading-lazy.png"),
   error: require("@/assets/images/empty.png"),
   adapter: {
     loaded({ bindType, el, naturalHeight, naturalWidth, $parent, src, loading, error, Init }) {
-      var s = 'ss';
-
       // do something here
       // example for call LoadedHandler
       // LoadedHandler(el)
@@ -41,6 +45,8 @@ Vue.use(Button).use(Tab).use(Tabs).use(Tabbar).use(TabbarItem).use(Toast).use(Em
     }
   }
 });
+
+
 //custom plug
 Vue.use(Utils);
 

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import CommonHttp from './commonHttp';
 import Methods from './methods';
+import LocalStorage from './localStorage';
 import Config from './config';
 
 
@@ -32,7 +33,7 @@ export default ({
     }
 
     //通用静态方法/全局变量
-    let commonCfg = Object.assign({}, Config, Methods);
+    let commonCfg = Object.assign({}, Config, Methods, LocalStorage);
     let cfg = Object.keys(commonCfg);
     cfg.forEach((key, val, obj) => {
 

@@ -22,8 +22,7 @@ export default ({
     'title': {
       type: String,
       default: function() {
-        return '';
-        // this.$route.meta.title;
+        return this.$route.meta.title;
       }
     },
     'leftText': {
@@ -39,7 +38,7 @@ export default ({
       default: true
     },
     'border': {
-      default: false
+      default: true
     },
     'placeholder': {
       default: false

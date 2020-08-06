@@ -29,6 +29,14 @@ const routes = [{
     }]
   },
   {
+    path: '/choosecity',
+    name: 'ChooseCity',
+    component: () => import('@components/ChooseCity'),
+    meta: {
+      title: '选择城市'
+    }
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
