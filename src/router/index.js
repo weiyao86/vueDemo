@@ -26,6 +26,15 @@ const routes = [{
         keepAlive: true,
         isNavBar: true
       }
+    }, {
+      path: 'cinema',
+      name: 'Cinema',
+      component: () => import('@views/home/Cinema'),
+      meta: {
+        title: '影院',
+        keepAlive: true,
+        isNavBar: true
+      }
     }]
   },
   {
@@ -56,7 +65,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  NProgress.start();
+  // NProgress.start();
   /*离开keepAlive组件可单独处理 */
 
   if (window.GlobalVue) {
@@ -66,7 +75,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(() => {
-  NProgress.done();
+  // NProgress.done();
 })
 
 export default router

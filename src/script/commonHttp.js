@@ -135,7 +135,8 @@ instance.interceptors.response.use(function(res) {
 /**
  * 
  */
-export default {
+
+let http = {
 
   cmpName: 'axios',
 
@@ -267,3 +268,5 @@ export default {
     instance.interceptors.request.eject(interceptors);
   }
 };
+
+export default { http };

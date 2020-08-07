@@ -1,32 +1,20 @@
 <template>
-  <div class="page movie-main">
+  <div class="page cniema-main">
     <mescroll-vue class="mescroll page-padBottom" :down="mescrollDown" :up="mescrollUp" ref="mescroll" @init="mescrollInit">
       <div :class="{'noImage': !swiperList.length}" class="head">
         <div class="search-wrapper" v-show="navFlag == 1">
-          <div class="choose-address" tag="div" @click="toChooseCity">
-            <div class="select-area">
-              <span class="txt">{{getCurrentCity}}</span>
-            </div>
-          </div>
           <div class="tabs">
             <van-tabs @click="onItemClick" v-model="activeName" class="tabs-item" title-active-color="#fff" title-inactive-color="#fff" color="#fff" :border=false line-width="60">
               <van-tab title="正在热映"></van-tab>
               <van-tab title="即将上映"></van-tab>
             </van-tabs>
           </div>
-          <img @click="toSearch" class="search-btn" src="../../assets/images/search.png" />
+          <div class="choose-address" tag="div" @click="toChooseCity">
+            <div class="select-area">
+              <span class="txt">{{getCurrentCity}}</span>
+            </div>
+          </div>
         </div>
-        <div class="swipe-wrap">
-          <van-swipe class="my-swipe" :autoplay="3000" :height="142.5" indicator-color="white">
-            <van-swipe-item v-for="(item, index) in swiperList" :key="index">
-              <img v-lazy="item.img" />
-            </van-swipe-item>
-          </van-swipe>
-        </div>
-      </div>
-      <div class="kefu">
-        服务热线：
-        <a href="tel:4000235507">400-023-5507</a>
       </div>
       <div class="list-wrap">
         <ul>
@@ -51,5 +39,5 @@
     </mescroll-vue>
   </div>
 </template>
-<script src="@assets/js/home/movie.js"></script>
+<script src="@assets/js/home/cinema.js"></script>
 <style lang="scss" src="@assets/styles/home/movie.scss" scoped />

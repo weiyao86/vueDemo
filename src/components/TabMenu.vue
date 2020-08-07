@@ -6,7 +6,7 @@
         <img :src="props.active ? icon.active[0] : icon.inactive[0]" />
       </template>
     </van-tabbar-item>
-    <van-tabbar-item to="/main/movie1">
+    <van-tabbar-item replace to="/main/cinema">
       <span>影院</span>
       <template #icon="props">
         <img :src="props.active ? icon.active[1] : icon.inactive[1]" />

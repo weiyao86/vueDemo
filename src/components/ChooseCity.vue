@@ -2,27 +2,24 @@
   <div class="page">
     <nav-bar></nav-bar>
     <div class="content-wrap">
-      <van-index-bar :index-list="['当前','热门','A','B','C']">
+      <van-index-bar>
         <van-cell title="重庆专区" />
-        <van-index-anchor>当前城市</van-index-anchor>
-        <van-cell title="上海" />
-        <van-index-anchor index="热门城市" />
-        <van-cell :title="hot.name" v-for="hot in hotCities" :key="hot.id" />
-        <van-index-anchor index="A" />
-        <van-cell title="文本" />
-        <van-cell title="文本" />
-        <van-cell title="文本" />
-        <van-index-anchor index="B" />
-        <van-cell title="文本" />
-        <van-cell title="文本" />
-        <van-cell :title="item" v-for="item in [1,2,3,4,5,6,7,87,4,3,23,3,1,2,3,12,123,12,321,132,123,132,4]" :key="item"></van-cell>
+        <van-cell title="当前城市" class="anchor" />
+        <van-cell :title="getCurrentCity" />
+        <van-cell title="热门城市" class="anchor" />
+        <van-cell :title="hot.name" v-for="hot in hotCities" :key="hot.id" @click="toMovieList(hot)" />
+        <template v-for="(item,idx) in allCountry">
+          <van-index-anchor :index="item.name" :key="idx" />
+          <van-cell :title="inner.name" v-for="inner in item.list" :key="inner.id" @click="toMovieList(inner)" />
+        </template>
       </van-index-bar>
     </div>
   </div>
 </template>
 <script>
 import NavBar from "@components/NavBar";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
+import pinyin4js from "pinyin4js";
 export default {
   name: 'ChooseCity',
   data() {
@@ -34,7 +31,8 @@ export default {
     NavBar
   },
   computed: {
-    ...mapState({ hotCities: 'movieAllHotCities' })
+    ...mapState({ movieAreaType: 'movieAreaType', hotCities: 'movieAllHotCities', allCountry: 'movieAllCountryCities', cityName: 'cityName', currentCountryCity: 'currentCountryCity' }),
+    ...mapGetters(["getCurrentCity"])
   },
   mounted() {
     let me = this;
@@ -48,15 +46,32 @@ export default {
       let me = this;
       me.$http.get("/ajax/mao/city/list")
         .then(res => {
-          let data = res.data;
+          let data = res.data,
+            firstLetter = '',
+            letters = "abcdefghijklmnopqrstuvwxyz".toUpperCase(),
+            cities = letters.split('').map(item => { return { name: item, list: [] } });
 
-          me.initAllCities(data);
+          data.city.forEach(item => {
+            firstLetter = pinyin4js.getShortPinyin(item.name).substr(0, 1).toUpperCase();
+            let idx = letters.indexOf(firstLetter);
+
+            cities[idx].list.push({ name: item.name, id: item.id });
+
+          });
+
+
+          me.initAllCities(cities);
 
         }).catch(error => {
           //movieNoNetwork(error);
           // this.hasNetwork = false;
         })
 
+    },
+
+    toMovieList(item) {
+      let me = this;
+      alert(item.name)
     }
 
   }
@@ -89,6 +104,11 @@ export default {
       &--sticky {
         color: #1c8ef0;
       }
+    }
+
+    .anchor {
+      font-size: 16px;
+      background: #f3f3f3;
     }
   }
 

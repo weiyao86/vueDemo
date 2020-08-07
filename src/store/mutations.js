@@ -11,6 +11,13 @@ export default {
     }
     console.log(state.cancelTokenList)
   },
+
+  chooseMovieAreaType(state, type) {
+    //重庆与全国  1/2
+
+    state.movieAreaType = type;
+
+  },
   //热门城市,全国城市
   initAllCities(state, data) {
     state.movieAllCountryCities = data;

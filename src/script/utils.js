@@ -14,26 +14,31 @@ export default ({
     //定义全局指令
 
     //定义全局过滤器
-
-    Vue.filter("httpImage", Methods['httpImage'])
+    vue.filter("httpImage", Methods['httpImage'])
 
     //注入组件选项
-    // Vue.mixin({
-    //  created(){}
-    // })
+    vue.mixin({
+      //处理mescroll插件恢复到原有滚动位置
+      beforeRouteEnter(to, from, next) {
+
+        next(vm => {
+          vm.$refs.mescroll && vm.$refs.mescroll.beforeRouteEnter();
+        })
+      },
+      // 离开路由时,记录列表状态
+      beforeRouteLeave(to, from, next) {
+        let me = this;
+
+        me.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave();
+
+        next();
+      }
+    })
 
     //添加实例方法
     //Vue.prototype.$myMethod=()=>{}
     let props = {};
-    //请求
-    props['$http'] = {
-      get() {
-        return CommonHttp;
-      }
-    }
-
-    //通用静态方法/全局变量
-    let commonCfg = Object.assign({}, Config, Methods, LocalStorage);
+    let commonCfg = Object.assign({}, Config, Methods, LocalStorage, CommonHttp);
     let cfg = Object.keys(commonCfg);
     cfg.forEach((key, val, obj) => {
 

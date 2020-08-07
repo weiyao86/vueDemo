@@ -2,7 +2,7 @@ import MescrollVue from "mescroll.js/mescroll.vue";
 import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
-  name: "Movie",
+  name: "Cinema",
   data() {
     return {
       activeName: 0,
@@ -37,7 +37,9 @@ export default {
   created() {},
 
   mounted() {
+
     let me = this;
+    console.log('cinema....')
     me.getBannerByKey();
     me.initLocation();
   },
