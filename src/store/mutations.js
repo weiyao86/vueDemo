@@ -1,9 +1,11 @@
 export default {
 
+  // 缓存异步请求
   setCancelToken(state, cancel) {
     state.cancelTokenList.push(cancel);
   },
 
+  // 取消未完成异步请求
   removeCancelToken(state, opts) {
     for (let i = state.cancelTokenList.length - 1; i >= 0; i--) {
       state.cancelTokenList[i].call(null, '取消中。。。');
@@ -12,6 +14,13 @@ export default {
     console.log(state.cancelTokenList)
   },
 
+  //设置经纬度
+  setLngAndLat(state, opts) {
+    state.lng = opts.lng;
+    state.lat = opts.lat;
+  },
+
+  //设置当前城市类型
   chooseMovieAreaType(state, type) {
     //重庆与全国  1/2
 

@@ -1,4 +1,5 @@
 import localStorage from "./localStorage";
+import store from "../store";
 
 let methods = {
   dateFormat(date, format) {
@@ -97,9 +98,17 @@ let methods = {
       //城市定位
       geolocation.getCityInfo(function(status, rst) {
         if (status == "complete" && rst.info === "SUCCESS") {
+          let lng = rst.center[0],
+            lat = rst.center[1];
           localStorage.setStorage('lng', rst.center[0]);
           localStorage.setStorage('lat', rst.center[1]);
           console.log('高德地图城市定位成功', status, rst);
+
+          store.commit("setLngAndLat", {
+            lng: lng,
+            lat: lat
+          });
+          console.log('-----------------------------------------');
         }
         if (typeof cb == "function") {
           cb.call(null, rst);

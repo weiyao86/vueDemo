@@ -11,11 +11,12 @@
     }
 
     .head {
-        height: 210px;
-        background: url("../../images/banner_bj.png") no-repeat top left/cover transparent;
+        height: 50px;
+        background: #fff;
         display: flex;
         flex-flow: column;
         padding-top: 25px;
+        position: relative;
 
         &.noImage {
             background: url("../../images/xytlogo.png") no-repeat center center;
@@ -40,14 +41,14 @@
                         font-size: 14px;
                         line-height: 16px;
                         height: 16px;
-                        color: #fff;
+                        color: #666;
                         position: relative;
 
                         &::after {
                             content: '';
                             border-width: 6px;
                             border-style: solid;
-                            border-color: #fff transparent transparent transparent;
+                            border-color: #ccc transparent transparent transparent;
                             position: absolute;
                             bottom: 0;
                             margin-left: 4px;
@@ -76,6 +77,23 @@
                                 bottom: 0;
                             }
                         }
+
+                        .van-tabs__nav--card {
+                            border: none;
+
+                            .van-tab {
+                                color: #999;
+                                background-color: #dfdfdf;
+                                border: none;
+                                padding: 0 10px;
+                            }
+
+                            .van-tab.van-tab--active {
+                                color: #333;
+                                background-color: #f3f3f3;
+                            }
+
+                        }
                     }
                 }
             }
@@ -83,6 +101,45 @@
     }
 
     .list-wrap {
+        position: relative;
+
+        .mescroll {
+            position: fixed;
+            top: 128px;
+            bottom: 0;
+            height: auto;
+        }
+
+        .tabs-wrap {
+            display: flex;
+            height: 32px;
+            line-height: 32px;
+            align-items: center;
+
+            .tabs-inner-item {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+
+                /deep/ .van-tabs__wrap {
+                    height: 100%;
+
+                    .van-tabs__nav {
+                        background: transparent;
+                        padding-bottom: 0;
+
+                        .van-tabs__line {
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            .search-icon {
+                width: 60px;
+            }
+        }
+
         .item {
             padding: 10px;
             display: flex;
@@ -153,6 +210,42 @@
 
                 .van-button--danger {
                     background: #cf2414;
+                }
+            }
+        }
+
+
+        .search-action-wrap {
+            padding: 10px 12px;
+            box-shadow: 5px 5px 10px #eee;
+        }
+
+        .cinema-items {
+            .cniema-list {
+                height: 48px;
+                padding: 20px 0 20px 12px;
+
+                .top {
+                    font-size: 16px;
+                    line-height: 18px;
+                    color: #1a1a1a;
+                    padding-bottom: 12px;
+                }
+
+                .middle {
+                    display: flex;
+                    justify-content: center;
+                    font-size: 14px;
+                    color: #989898;
+
+                    .sub-title {
+                        flex: 1;
+                    }
+
+                    .distance {
+                        width: 64px;
+                        padding-left: 10px;
+                    }
                 }
             }
         }

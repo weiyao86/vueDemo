@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vClick from './script/directive/v-click-index'
-import { Cell, IndexBar, IndexAnchor, NavBar, Button, Tab, Tabs, Tabbar, TabbarItem, Toast, Empty, Swipe, SwipeItem, Lazyload } from 'vant'
+import { Search, Icon, Cell, IndexBar, IndexAnchor, NavBar, Button, Tab, Tabs, Tabbar, TabbarItem, Toast, Empty, Swipe, SwipeItem, Lazyload } from 'vant'
 import VueWechatTitle from 'vue-wechat-title'
 import Utils from './script/utils'
 
@@ -23,7 +23,7 @@ FastClick.attach(document.body);
 Vue.use(VueWechatTitle);
 Vue.use(vClick);
 //vant ui cmp
-const vantCmp = [Cell, IndexBar, IndexAnchor, NavBar, Button, Tab, Tabs, Tabbar, TabbarItem, Toast, Empty, Swipe, SwipeItem];
+const vantCmp = [Search, Icon, Cell, IndexBar, IndexAnchor, NavBar, Button, Tab, Tabs, Tabbar, TabbarItem, Toast, Empty, Swipe, SwipeItem];
 vantCmp.forEach(function(item) {
   Vue.use(item);
 });

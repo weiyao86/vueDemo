@@ -1,3 +1,5 @@
+import localStorage from "../script/localStorage";
+
 let defaultCityId = 45;
 let defaultCityName = '重庆';
 
@@ -8,6 +10,7 @@ export default {
   movieAreaType: 1, //1-重庆专区  2-全国专区
   currentCountryCity: '',
   movieAllCountryCities: [], //全国城市
-  movieAllHotCities: [] //热门城市
-
+  movieAllHotCities: [], //热门城市
+  lng: localStorage.getStorage('lng'), //经度
+  lat: localStorage.getStorage('lat') //纬度
 }

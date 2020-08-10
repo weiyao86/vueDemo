@@ -16,17 +16,12 @@
      display: none;
  }
 
- input {
-     caret-color: #ff9900;
- }
-
-
  .page {
      position: relative;
      padding-bottom: 0;
 
      .header-wrap {
-         padding-top: 2.875rem;
+         padding-top: 72px;
      }
 
      /* 头部样式 */
@@ -66,11 +61,11 @@
 
  .isIPhoneX {
      .page {
-         padding-bottom: 3.125rem;
+         padding-bottom: 78px;
      }
 
      .paddingBottom {
-         padding-bottom: 3.125rem;
+         padding-bottom: 78px;
      }
  }
 

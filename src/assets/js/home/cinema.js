@@ -9,7 +9,9 @@ export default {
       swiperList: [],
       navFlag: 1,
       type: 1, // 1是热映2是待映
+      cinemaSearchVal: '',
       movieList: [], //电影列表
+      cniemaList: [], //影院列表
       mescroll: null,
       mescrollDown: {},
       mescrollUp: {
@@ -23,18 +25,50 @@ export default {
           }
         }
       },
+      mescrollCinema: null,
+      mescrollCinemaDown: {},
+      mescrollCinemaUp: {
+        callback: this.upCinemaCallback,
+        page: {
+          num: 0,
+          size: 10,
+          empty: {
+            wrapId: '',
+            tip: '暂无相关数据'
+          }
+        }
+      },
       pageNum: 1,
-      limit: 10
+      limit: 10,
+      cinemaPageNum: 1,
+      cinemaLimit: 10
+    }
+  },
+  filters: {
+    formDistance: (val) => {
+      if (!val) return;
+      let ds = 0;
+      if (val > 0 && val <= 1000) {
+        ds = val + 'km';
+      } else if (val >= 0 && val <= 1) {
+        ds = val * 1000 + 'm';
+      } else {
+        ds = '>1000km';
+      }
+      return ds;
     }
   },
   components: {
     MescrollVue
   },
   computed: {
-    ...mapState(["cityId", "cityName", "movieAreaType"]),
+    ...mapState(["cityId", "cityName", "movieAreaType", "lng", "lat"]),
     ...mapGetters(["getCurrentCity"])
   },
-  created() {},
+
+  created() {
+
+  },
 
   mounted() {
 
@@ -61,7 +95,6 @@ export default {
 
     upCallback(page, mescroll) {
       let me = this;
-
       me.pageNum = page.num;
       let params = {
         cityId: me.cityId,
@@ -80,6 +113,43 @@ export default {
         me.mescroll.endBySize(curData.length, rst.data.movieTotal);
       }).catch(error => me.mescroll.endErr());
 
+    },
+
+    mescrollCinemaInit(mescrollCinema) {
+      let me = this;
+      me.mescrollCinema = mescrollCinema;
+    },
+
+    upCinemaCallback(page, mescroll) {
+      let me = this;
+
+      me.cinemaPageNum = page.num;
+      let params = {
+        cityId: me.cityId,
+        offset: (me.cinemaPageNum - 1) * me.cinemaLimit,
+        limit: me.cinemaLimit,
+        longitude: me.lng,
+        latitude: me.lat,
+        districtId: '',
+        cinemaName: me.cityName,
+        enter: 'dianying'
+
+      }
+      alert(me.lng)
+      me.$http
+        .get("/ajax/mw/cinema/filter_1", { params: params })
+        .then(rst => {
+          console.log('******************************************');
+
+          let curData = rst.data.cinema;
+          if (me.cinemaPageNum == 1) {
+            me.cniemaList = [];
+          }
+          me.cniemaList = [...me.cniemaList, ...curData];
+
+          me.mescrollCinema.endBySize(curData.length, rst.data.cinemaTotal);
+        })
+        .catch(error => me.mescrollCinema.endErr());
     },
 
     getBannerByKey() {
@@ -112,6 +182,14 @@ export default {
           console.log(error);
         });
     },
+
+    onChangeTab(name, title) {
+      let me = this;
+      me.navFlag = name;
+    },
+
+    //搜索影院
+    onSearch() {},
 
     toChooseCity() {
       let me = this;
