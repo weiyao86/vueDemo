@@ -11,7 +11,7 @@
       <template #icon="props">
         <img :src="props.active ? icon.active[1] : icon.inactive[1]" />
       </template></van-tabbar-item>
-    <van-tabbar-item class="animate__animated animate__heartBeat" to="/main/movie2">
+    <van-tabbar-item class="animate__animated animate__heartBeat" to="/main/scan">
       <span>扫码</span>
       <template #icon="props">
         <img :src="props.active ? icon.active[2] : icon.inactive[2]" />

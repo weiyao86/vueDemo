@@ -18,6 +18,22 @@ export default ({
 
     //注入组件选项
     vue.mixin({
+      data() {
+        return {
+          transitionName: "slide-fade-left"
+        };
+      },
+      watch: {
+        //页面过渡
+        $route(to, from) {
+          let me = this;
+          if (to.meta.index > from.meta.index) {
+            me.transitionName = "slide-fade-right";
+          } else {
+            me.transitionName = "slide-fade-left";
+          }
+        }
+      },
       //处理mescroll插件恢复到原有滚动位置
       beforeRouteEnter(to, from, next) {
 
@@ -29,7 +45,7 @@ export default ({
       beforeRouteLeave(to, from, next) {
         let me = this;
 
-        me.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave();
+        me.$refs.mescroll && me.$refs.mescroll.beforeRouteLeave();
 
         next();
       }

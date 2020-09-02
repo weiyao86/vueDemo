@@ -1,8 +1,10 @@
 <template>
   <div id="app">
+     <transition :name="transitionName">
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive" v-wechat-title="$route.meta.title"></router-view>
     </keep-alive>
+    </transition>
     <router-view v-if="!$route.meta.keepAlive" v-wechat-title="$route.meta.title"></router-view>
   </div>
 </template>

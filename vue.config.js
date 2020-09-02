@@ -19,6 +19,8 @@ module.exports = {
   pwa: {}, // 向 PWA 插件传递选项。
   chainWebpack: config => {
     config.resolve.symlinks(true); // 修复热更新失效
+    //es6 垫片
+    config.entry("main").add('babel-polyfill');
     // 如果使用多页面打包，使用vue inspect --plugins查看html是否在结果数组中
     config.plugin("html").tap(args => {
       // 修复 Lazy loading routes Error

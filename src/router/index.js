@@ -24,6 +24,7 @@ const routes = [{
       meta: {
         title: '电影',
         keepAlive: true,
+        index:0,  //动画层级
         isNavBar: true
       }
     }, {
@@ -33,6 +34,17 @@ const routes = [{
       meta: {
         title: '影院',
         keepAlive: true,
+        index:1,
+        isNavBar: true
+      }
+    }, {
+      path: 'scan',
+      name: 'Scan',
+      component: () => import('@views/home/Scan'),
+      meta: {
+        title: '扫码',
+        keepAlive: true,
+        index:2,
         isNavBar: true
       }
     }]
@@ -42,7 +54,8 @@ const routes = [{
     name: 'ChooseCity',
     component: () => import('@components/ChooseCity'),
     meta: {
-      title: '选择城市'
+      title: '选择城市',
+      index:10
     }
   },
   {

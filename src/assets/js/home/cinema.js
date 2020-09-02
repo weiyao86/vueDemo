@@ -9,7 +9,7 @@ export default {
       swiperList: [],
       navFlag: 1,
       type: 1, // 1是热映2是待映
-      cinemaSearchVal: '',
+      cinemaSearchVal: "",
       movieList: [], //电影列表
       cniemaList: [], //影院列表
       mescroll: null,
@@ -20,8 +20,8 @@ export default {
           num: 0,
           size: 10,
           empty: {
-            wrapId: '',
-            tip: '暂无相关数据'
+            wrapId: "",
+            tip: "暂无相关数据"
           }
         }
       },
@@ -33,8 +33,8 @@ export default {
           num: 0,
           size: 10,
           empty: {
-            wrapId: '',
-            tip: '暂无相关数据'
+            wrapId: "",
+            tip: "暂无相关数据"
           }
         }
       },
@@ -42,19 +42,15 @@ export default {
       limit: 10,
       cinemaPageNum: 1,
       cinemaLimit: 10
-    }
+    };
   },
   filters: {
-    formDistance: (val) => {
+    formDistance: val => {
       if (!val) return;
-      let ds = 0;
-      if (val > 0 && val <= 1000) {
-        ds = val + 'km';
-      } else if (val >= 0 && val <= 1) {
-        ds = val * 1000 + 'm';
-      } else {
-        ds = '>1000km';
-      }
+      let ds = ">1000km";
+      val > 0 && val <= 1000 && (ds = val + "km");
+      val >= 0 && val <= 1 && (ds = val * 1000 + "m");
+
       return ds;
     }
   },
@@ -66,24 +62,20 @@ export default {
     ...mapGetters(["getCurrentCity"])
   },
 
-  created() {
-
-  },
+  created() {},
 
   mounted() {
-
     let me = this;
-    console.log('cinema....')
+    console.log("cinema....");
     me.getBannerByKey();
     me.initLocation();
   },
   methods: {
-    ...mapMutations(['chooseMovieAreaType']),
+    ...mapMutations(["chooseMovieAreaType"]),
 
     initLocation() {
       let me = this;
       me.$initLocation(rst => {
-
         console.log(rst);
       });
     },
@@ -103,16 +95,18 @@ export default {
         movieType: me.type
       };
 
-      me.$http.get("/ajax/mw/movie/list_1", { params: params }).then(rst => {
-        let curData = rst.data.movie;
-        if (me.pageNum == 1) {
-          me.movieList = [];
-        }
+      me.$http
+        .get("/ajax/mw/movie/list_1", { params: params })
+        .then(rst => {
+          let curData = rst.data.movie;
+          if (me.pageNum == 1) {
+            me.movieList = [];
+          }
 
-        me.movieList = [...me.movieList, ...curData];
-        me.mescroll.endBySize(curData.length, rst.data.movieTotal);
-      }).catch(error => me.mescroll.endErr());
-
+          me.movieList = [...me.movieList, ...curData];
+          me.mescroll.endBySize(curData.length, rst.data.movieTotal);
+        })
+        .catch(error => me.mescroll.endErr());
     },
 
     mescrollCinemaInit(mescrollCinema) {
@@ -130,16 +124,15 @@ export default {
         limit: me.cinemaLimit,
         longitude: me.lng,
         latitude: me.lat,
-        districtId: '',
+        districtId: "",
         cinemaName: me.cityName,
-        enter: 'dianying'
+        enter: "dianying"
+      };
 
-      }
-      alert(me.lng)
       me.$http
         .get("/ajax/mw/cinema/filter_1", { params: params })
         .then(rst => {
-          console.log('******************************************');
+          console.log("******************************************");
 
           let curData = rst.data.cinema;
           if (me.cinemaPageNum == 1) {
@@ -155,7 +148,8 @@ export default {
     getBannerByKey() {
       let me = this;
 
-      me.$http.post("/api/shop.banner/getBannerByKey")
+      me.$http
+        .post("/api/shop.banner/getBannerByKey")
         .then(res => {
           let data = res.data;
           if (data) {
@@ -167,15 +161,13 @@ export default {
                 // 首页banner广告
                 if (item.key == "banner") {
                   item.img = me.$httpImage(item.img);
-                  console.log(item.img)
+                  console.log(item.img);
                   me.swiperList.push(item);
                 }
               });
               // me.swiperList.length = 1;
             }
-          } else {
-
-          }
+          } else {}
         })
         .catch(error => {
           console.log("错误");
@@ -195,8 +187,8 @@ export default {
       let me = this;
       me.chooseMovieAreaType(1);
       me.$router.push({
-        path: '/choosecity'
-      })
+        path: "/choosecity"
+      });
     },
 
     onItemClick(idx) {
@@ -204,14 +196,13 @@ export default {
 
       me.type = idx == 0 ? 1 : 2;
       me.mescroll.resetUpScroll();
-
     },
 
     toSearch() {},
 
     // 选择影院
     goChooseCinema(item) {
-      return alert('choose')
+      return alert("choose");
       // mao vs wanda id vs wd_id
       if (item.wd_id != 0) {
         this.$router.push({
@@ -234,4 +225,4 @@ export default {
       }
     }
   }
-}
+};

@@ -28,6 +28,8 @@
     "@vue/cli-plugin-vuex": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
     "babel-plugin-import": "^1.13.0",
+    "babel-polyfill": "^6.26.0",
+    "better-scroll": "^2.0.1",
     "compression-webpack-plugin": "^4.0.0",
     "fastclick": "^1.0.6",
     "image-webpack-loader": "^6.0.0",
