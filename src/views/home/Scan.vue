@@ -2,7 +2,7 @@
   <div class="page">
     this is a page
     <button @click="show = !show">{{show ? 'HIDE' : 'SHOW'}}</button>
-    <custom-dialog v-show="show">
+    <custom-dialog v-show="show" :info="[{logit:[1,2,3,4,5,6]}]">
       this is a plugin
       <template #inner="{userInfo:person}">
         inner box
