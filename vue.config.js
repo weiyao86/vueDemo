@@ -92,20 +92,21 @@ module.exports = {
         globalVars: {
           primary: '#333'
         }
-      },
+      }
 
       // scss: {
       //   data: `@import "@assets/styles/global.scss";` //仅作为添加全局变量使用 path.resolve(__dirname, '@src/assets/styles/*.scss')
       // },
-      postcss: {
-        plugins: [
-          autoprefixer(),
-          postcssPxtorem({
-            rootValue: 16, //vant-UI的官方根字体大小是37.5
-            propList: ['*']
-          })
-        ]
-      }
+      // postcss: {
+      //   plugins: [
+      //     autoprefixer(),
+      //     postcssPxtorem({
+      //       rootValue: 75, //vant-UI的官方根字体大小是37.5  vant中需单独设置，放入postcss.config.js中判断
+      //       propList: ['*'],
+      //       selectorBlackList: ['van']
+      //     })
+      //   ]
+      // }
     }
   },
   devServer: {

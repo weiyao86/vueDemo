@@ -1,11 +1,11 @@
 //rem 布局
 (function(window, document) {
   var setRem = function() {
-    var baseSize = 32,
+    var baseSize = 75,
       innerWidth =
-        document.documentElement.clientWidth ||
-        document.documentElement.getBoundingClientRect().width ||
-        window.innerWidth,
+      document.documentElement.clientWidth ||
+      document.documentElement.getBoundingClientRect().width ||
+      window.innerWidth,
       scale = innerWidth / 750;
 
     document.documentElement.style.fontSize =
