@@ -3,105 +3,107 @@
 
 html,
 body {
-  height: 100%;
-  transition: all 0.2s;
+    height: 100%;
+    transition: all 0.2s;
 }
 
 * {
-  touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .page {
-  position: relative;
-  padding-bottom: 0;
+    position: relative;
+    padding-bottom: 0;
 
-  .header-wrap {
-    padding-top: 72px;
-  }
-
-  /* 头部样式 */
-  .van-nav-bar {
-    background: #fff;
-
-    &--fixed {
-      top: 24px;
+    .header-wrap {
+        padding-top: 144px;
     }
 
-    .van-icon {
-      color: #ccc;
+    /* 头部样式 */
+    .van-nav-bar {
+        background: #fff;
+
+        &--fixed {
+            top: 48px;
+        }
+
+        .van-icon {
+            color: #ccc;
+        }
+
+        .van-nav-bar__title {
+            color: #666;
+            font-size: 36px;
+        }
     }
 
-    .van-nav-bar__title {
-      color: #666;
-      font-size: 18px;
+    .content-wrap {
+        position: fixed;
+        top: 140px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-bottom: 68px;
+        box-sizing: border-box;
+        overflow: auto;
     }
-  }
-
-  .content-wrap {
-    position: fixed;
-    top: 69.5px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-bottom: 34px;
-    box-sizing: border-box;
-    overflow: auto;
-  }
 }
 
 .paddingBottom {
-  padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 .isIPhoneX {
-  .page {
-    padding-bottom: 78px;
-  }
+    .page {
+        padding-bottom: 100px;
+    }
 
-  .paddingBottom {
-    padding-bottom: 78px;
-  }
+    .paddingBottom {
+        padding-bottom: 160px;
+    }
 }
 
 //  页面过渡---begin
-$direction: "left", "right";
+$direction: "left",
+"right";
 
 @each $dir in $direction {
-  $enterNum: -100vw;
-  $leaveNum: 100vw;
-  @if $dir == "right" {
-    $enterNum: 100vw;
-    $leaveNum: -100vw;
-  }
-  .slide-fade-#{$dir}-leave-active,
-  .slide-fade-#{$dir}-enter-active {
-    transition: all 0.3s ease;
-  }
+    $enterNum: -100vw;
+    $leaveNum: 100vw;
 
-  .slide-fade-#{$dir}-enter {
-    transform: translateX($enterNum);
-    opacity: 0;
-  }
+    @if $dir=="right" {
+        $enterNum: 100vw;
+        $leaveNum: -100vw;
+    }
 
-  .slide-fade-#{$dir}-leave-to {
-    transform: translateX($leaveNum);
-    opacity: 0;
-  }
+    .slide-fade-#{$dir}-leave-active,
+    .slide-fade-#{$dir}-enter-active {
+        transition: all 0.3s ease;
+    }
+
+    .slide-fade-#{$dir}-enter {
+        transform: translateX($enterNum);
+        opacity: 0;
+    }
+
+    .slide-fade-#{$dir}-leave-to {
+        transform: translateX($leaveNum);
+        opacity: 0;
+    }
 }
+
 //  页面过渡---end
 // IOS 安全区域
-@supports (bottom: constant(safe-area-inset-bottom)) or
-  (bottom: env(safe-area-inset-bottom)) {
-  body,
-  .page {
-    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
-      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-      env(safe-area-inset-bottom) env(safe-area-inset-left);
-  }
+@supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+
+    body,
+    .page {
+        padding: constant(safe-area-inset-top) constant(safe-area-inset-right) constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
 }

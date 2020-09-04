@@ -7,7 +7,7 @@ module.exports = ({
   //link https://github.com/youzan/vant/issues/1181
   console.log('*******************')
   console.log(file)
-  //按750*1334 设计稿1：1还原,第三方UI框架没适配rem－如(vant 根字体为37.5px),后续重写vant组件样式时需/2
+  //按750*1334 设计稿1：1还原,第三方UI框架没适配rem－如(vant 根字体为37.5px),后续重写vant组件样式时需px/2
   if (file && file.dirname && file.dirname.indexOf("vant") > -1) {
     remUnit = 37.5;
   } else {
@@ -17,7 +17,12 @@ module.exports = ({
     plugins: [
       px2rem({
         rootValue: remUnit, //vant-UI的官方根字体大小是37.5
-        propList: ['*']
+        unitPrecision: 5,
+        propList: ['*'],
+        selectorBlackList: [],
+        replace: true,
+        mediaQuery: false,
+        minPixelValue: 12
       }), AutoPrefixer({
         overrideBrowserslist: [
 

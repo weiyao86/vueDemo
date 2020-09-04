@@ -87,8 +87,8 @@ export default {
     }
 
     .van-cell {
-      line-height: 18px;
-      font-size: 14px;
+      /*line-height: 18px;
+      font-size: 14px;*/
 
       &:after {
         left: 0;
@@ -97,9 +97,9 @@ export default {
     }
 
     .van-index-anchor {
-      font-size: 16px;
+      /*font-size: 16px;*/
       background: #f3f3f3;
-      line-height: 38px;
+      /*line-height: 38px;*/
 
       &--sticky {
         color: #1c8ef0;
@@ -107,7 +107,7 @@ export default {
     }
 
     .anchor {
-      font-size: 16px;
+      font-size: 32px;
       background: #f3f3f3;
     }
   }
