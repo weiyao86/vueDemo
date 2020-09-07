@@ -1,5 +1,9 @@
 import MescrollVue from "mescroll.js/mescroll.vue";
-import { mapState, mapGetters, mapMutations } from "vuex";
+import {
+  mapState,
+  mapGetters,
+  mapMutations
+} from "vuex";
 
 export default {
   name: "Movie",
@@ -68,7 +72,9 @@ export default {
         movieType: me.type
       };
 
-      me.$http.get("/ajax/mw/movie/list_1", { params: params }).then(rst => {
+      me.$http.get("/ajax/mw/movie/list_1", {
+        params: params
+      }).then(rst => {
         let curData = rst.data.movie;
         if (me.pageNum == 1) {
           me.movieList = [];
@@ -115,7 +121,7 @@ export default {
       let me = this;
       me.chooseMovieAreaType(1);
       me.$router.push({
-        path: '/choosecity'
+        path: '/about/bar'
       })
     },
 

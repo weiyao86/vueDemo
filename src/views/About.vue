@@ -36,7 +36,7 @@ export default {
     }
   },
   created() {
-    alert('created')
+    // alert('created')
   },
   beforeRouteUpdate(to, from, next) {
     alert('beforeRouteUpdate')

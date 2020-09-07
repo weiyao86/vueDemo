@@ -84,6 +84,11 @@ $direction: "left",
     .slide-fade-#{$dir}-leave-active,
     .slide-fade-#{$dir}-enter-active {
         transition: all 0.3s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 
     .slide-fade-#{$dir}-enter {
@@ -91,10 +96,14 @@ $direction: "left",
         opacity: 0;
     }
 
-    .slide-fade-#{$dir}-leave-to {
+    .slide-fade-#{$dir}-leave {
         transform: translateX($leaveNum);
         opacity: 0;
     }
+
+    // .slide-fade-#{$dir}-leave-to {
+    //     opacity: 0;
+    // }
 }
 
 //  页面过渡---end
